@@ -1,8 +1,8 @@
-// import express from 'express';
-// import { saveWeatherData } from '../controllers/weatherController.js';
+import express from 'express';
+import { getWeather } from '../controllers/weatherController.js';
 
-// const router = express.Router();
+const router = express.Router();
 
-// router.post('/scrape', saveWeatherData);
+router.get('/scrape', getWeather );
 
-// export default router;
+export default router;
