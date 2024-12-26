@@ -12,23 +12,18 @@ const testScrapper = async (req, res) => {
         const response = await requestPromise(baseURL);
         const $ = cheerio.load(response);
         console.log("cheerio loaded !");
+        
+        const labels = ['today', 'tomorrow', 'todayPlus2', 'todayPlus3', 'todayPlus4', 'todayPlus5'];
+        const windSpeeds = {};
+        
+        for (let i = 0; i <= 5; i++) {
+            const windSpeed = $('ul.previsiondecjour-total-bottomaccueil > a > li[class^="windspeedKmph"]').eq(i).text().trim();
+            windSpeeds[labels[i]] = windSpeed;
+        }
+        
+        console.log(windSpeeds);
 
-        const todayTemperature = $('li > a[href="/previsions/tanger#jour-1"] > label.observation_c-small').text().trim();
-       
-        const [todayHigh, todayLow] = todayTemperature.split("°", 2);
-
-        const days = [2, 3, 4, 5, 6, 7];
-        const temperatures = {
-            Today: { high: todayHigh, low: todayLow }
-        };
-
-        days.forEach(day => {
-            const tempText = $(`li > a[href="/previsions/tanger#jour-${day}"] > label.observation_c-small`).text().trim();
-            const [high, low] = tempText.split("°", 2);
-            temperatures[`TodayPlus${day - 1}`] = { high, low };
-        });
-
-        res.status(200).json(temperatures);
+        res.status(200).json(windSpeeds);
 
     } catch (error) {
         console.error('(scrappers/testScrapper.js) : Error occurred during scraping:', error);
