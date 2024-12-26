@@ -21,6 +21,10 @@ const scrapedData = async () => {
         const tomorrowTemperature = $('li > a[href="/previsions/tanger#jour-2"] > label.observation_c-small')
         .contents().first().text().trim();
 
+        console.log("Today temperature : " , todayTemperature);
+
+        console.log("Tomorrow temperature : " , tomorrowTemperature);
+
         const tomorrowTemperature2 = $('li > a[href="/previsions/tanger#jour-2"] > label.observation_c-small')
         .contents().eq(2).text().trim();
         
@@ -49,7 +53,7 @@ const scrapedData = async () => {
         console.log("Scrap test : " , tomorrowTemperature2);
 
 
-        //console.log("Weeks weather : " ,weekWeather);
+        console.log("Weeks weather : " ,weekWeather);
         return weekWeather;
     }catch (error) {
         console.error('(utils/scrapper.js) : Error occurred during scraping:', error);
