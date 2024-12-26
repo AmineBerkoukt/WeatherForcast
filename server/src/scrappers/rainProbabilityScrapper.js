@@ -7,7 +7,7 @@ config();
 baseURL = process.env.BASE_URL || "https://www.meteomaroc.com/meteo/tanger";
 
 // Need to extract the average humidity today & the next 7 days
-const humidityData = async () => {
+const rainProbabilityData = async () => {
     try {  
         const response = await requestPromise(baseURL); 
 
@@ -18,8 +18,8 @@ const humidityData = async () => {
         console.log("Scrap test : " , response);
 
     }catch (error) {
-        console.error('(scrappers/humidityScrapper.js) : Error occurred during scraping:', error);
+        console.error('(scrappers/rainProbabilityData.js) : Error occurred during scraping:', error);
     }
 };
 
-export default humidityData;
+export default rainProbabilityData;
